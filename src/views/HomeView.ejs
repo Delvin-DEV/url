@@ -1,39 +1,99 @@
-<!DOCTYPE html>
-<html lang="in">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delvenurl DONT RESELL!!</title>
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Bergabunglah dengan GrowPlus, server Growtopia terbaik dengan berbagai custom items dan pengalaman bermain yang menyenangkan.">
-    <meta name="keywords" content="Growtopia, Server Growtopia, GTPS, Growplus, Growtopia Private Server, Private Server">
-    <meta name="author" content="GrowPlus">
-    <meta property="og:title" content="GrowPlus | Minecraft Server">
-    <meta property="og:description" content="Bergabunglah dengan GrowPlus, server Growtopia terbaik dengan berbagai custom items dan pengalaman bermain yang menyenangkan.">
-    <meta property="og:image" content="https://login.cdngtps.my.id/assets/images/og.jpg">
-    <meta property="og:url" content="https://login.cdngtps.my.id">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GrowPlus | Minecraft Server">
-    <meta name="twitter:description" content="Bergabunglah dengan GrowPlus, server Growtopia terbaik dengan berbagai custom items dan pengalaman bermain yang menyenangkan.">
-    <meta name="twitter:image" content="https://login.cdngtps.my.id/assets/images/og.jpg">
-</head>
-<body>
-    <header>
-
-    </header>
-
-    <main>
-        <section id="home" class="h-screen bg-[url(../images/Growtopia-Sunny.webp)] bg-right bg-no-repeat bg-cover">
-
-        </section>
-    </main>
-
-    <footer>
-
-    </footer>
-</body>
-</html>
+app.get('/', function (req, res) {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>GT Watermark</title>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Press Start 2P', cursive;
+          background: linear-gradient(to bottom, #8fd3f4 0%, #1e90ff 100%);
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+        }
+        .watermark-box {
+          background: rgba(0, 0, 0, 0.75);
+          border: 2px solid #ffffff30;
+          padding: 25px;
+          border-radius: 14px;
+          text-align: center;
+          color: white;
+          text-shadow: 1px 1px #000;
+          max-width: 650px;
+          box-shadow: 0 0 25px #63d2ff;
+          position: relative;
+          animation: float 3s ease-in-out infinite, pulse 1.5s infinite;
+        }
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+          100% { transform: translateY(0px); }
+        }
+        @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 15px #3bc9db; }
+          50% { box-shadow: 0 0 25px #74c0fc; }
+        }
+        .title {
+          font-size: 20px;
+          color: #ffe066;
+          margin-bottom: 16px;
+          text-shadow: 0 0 8px #ffe066;
+        }
+        .dl-icon {
+          width: 30px;
+          height: 30px;
+          background: linear-gradient(135deg, #00f0ff, #007eff);
+          border-radius: 6px;
+          box-shadow: 0 0 10px #00eaff, 0 0 4px #ffffff;
+          position: absolute;
+          top: -18px;
+          left: -18px;
+          animation: rotateIcon 6s linear infinite;
+        }
+        .dl-icon::after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          right: 4px;
+          bottom: 4px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.25);
+          box-shadow: inset 0 0 6px white;
+        }
+        @keyframes rotateIcon {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .content {
+          font-size: 10px;
+          color: #f1f1f1;
+          line-height: 1.7;
+        }
+        .highlight {
+          color: #fab005;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="watermark-box">
+        <div class="dl-icon"></div>
+        <div class="title">Unauthorized Usage Warning</div>
+        <div class="content">
+          This login URL was made by <span class="highlight">Bryan</span> and <span class="highlight">delvineX</span>.<br>
+          To use or replicate this page, you must obtain<br>
+          explicit permission or purchase the <span class="highlight">Premium Version</span>.<br><br>
+          &copy; 2025 Bryan & delvineX. All rights reserved.
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
+});
