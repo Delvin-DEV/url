@@ -1,433 +1,139 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Growtopia - Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background: transparent !important;
-            font-size: 14px;
-            overscroll-behavior: none;
-        }
-
-        .login-container {
-            position: relative;
-            background: black;
-            padding: 3px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        @keyframes breathing-color {
-            0% {
-                background-color: navy;
-            }
-            50% {
-                background-color: gold;
-            }
-            100% {
-                background-color: navy;
-            }
-        }
-
-        .login-container::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 700%;
-            height: 700%;
-            animation: breathing-color 3s ease-in-out infinite;
-            z-index: 0;
-        }
-        
-        .login-content {
-            position: relative;
-            background: black;
-            border-radius: 10px;
-            padding: 0.3rem;
-            z-index: 1;
-        }
-
-        @keyframes rgb-rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .animated-text span {
-            display: inline-block;
-            margin: 0 0.05rem;
-            transition: color 0.2s;
-        }
-
-        .input-field {
-            background-color: rgba(43, 77, 109, 0.3);
-            border: 1px solid rgba(129, 212, 250, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus-within {
-            border-color: #00b8ff;
-            box-shadow: 0 0 8px rgba(0, 184, 255, 0.3);
-        }
-
-        .login-button {
-            background: linear-gradient(45deg, #00b8ff, #0056e0);
-            transition: all 0.3s ease;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-button:hover {
-            background: linear-gradient(45deg, #0056e0, #00b8ff);
-            transform: scale(1.03);
-        }
-
-        /* Mobile adjustments - unchanged */
-        @media (max-width: 640px) {
-            .login-container {
-                width: 85%;
-                margin: 0.4rem auto;
-                transform: scale(0.8);
-            }
-
-            .login-content {
-                padding: 0.5rem;
-            }
-
-            .animated-text {
-                font-size: 1rem;
-            }
-
-            .login-content h1 {
-                font-size: 1rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .input-field {
-                padding: 0.4rem;
-            }
-
-            .input-field input {
-                font-size: 0.75rem;
-            }
-
-            .login-button {
-                height: 32px;
-                font-size: 0.75rem;
-            }
-        }
-
-        /* Tablet screens */
-        @media (min-width: 641px) and (max-width: 1023px) {
-            .login-container {
-                width: 60%;
-                /* Reduced from 70% */
-                max-width: 500px;
-                transform: scale(0.9);
-            }
-
-            .login-content {
-                padding: 1rem;
-            }
-
-            .animated-text {
-                font-size: 1.25rem;
-            }
-
-            .input-field {
-                padding: 0.6rem;
-            }
-
-            .login-button {
-                height: 36px;
-                font-size: 0.875rem;
-            }
-        }
-
-        /* Desktop screens - adjusted width */
-        @media (min-width: 1024px) {
-            .login-container {
-                width: 40%;
-                /* Reduced from 65% */
-                max-width: 450px;
-                /* Added max-width */
-                transform: scale(1.1);
-                margin: 2rem auto;
-            }
-
-            .login-content {
-                padding: 1.25rem;
-            }
-
-            .animated-text {
-                font-size: 1.5rem;
-            }
-
-            .input-field {
-                padding: 0.75rem;
-            }
-
-            .input-field input {
-                font-size: 0.875rem;
-            }
-
-            .login-button {
-                height: 40px;
-                font-size: 0.875rem;
-            }
-
-            .fas {
-                font-size: 1rem;
-            }
-        }
-
-        /* Shared button styles */
-        #loginButton,
-        #createGrowIdButton {
-            width: 100%;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            letter-spacing: 0.025em;
-        }
-
-        #createGrowIdButton {
-            background: linear-gradient(45deg, #22c55e, #16a34a);
-        }
-
-        #createGrowIdButton:hover {
-            background: linear-gradient(45deg, #16a34a, #22c55e);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growtopia - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+<body class="flex items-center justify-center min-h-screen bg-transparent">
 
-<body class="flex flex-col items-center justify-center min-h-screen py-2">
-    <div class="fixed inset-0 flex items-center justify-center">
-        <div class="login-container">
-            <div class="login-content">
-                <h1 id="animatedText" class="animated-text text-center font-bold mb-2"></h1>
-                <div id="errorDiv"
-                    class="hidden flex flex-col mt-2 text-xs text-red-500 font-bold px-2 py-1 bg-red-900/30 rounded">
-                    <span id="errorMessage"></span>
-                </div>
-
-                <form method="post" action="/player/growid/login/validate" accept-charset="UTF-8" id="loginForm"
-                    class="mt-2 space-y-2">
-
-                    <div class="mb-2">
-                        <input name="type" value="log" type="hidden" />
-                        <input name="_token" value="{}" type="hidden" />
-                        <label for="loginGrowId" class="block text-white text-xs mb-1">Your TIKTOK-PS Username</label>
-                        <div class="input-field flex items-center rounded-lg px-2 py-1.5">
-                            <i class="fas fa-user text-white mr-2"></i>
-                            <input type="text" name="growId" id="loginGrowId"
-                                class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                                placeholder="Enter your TIKTOK-PS Username" autocomplete="username">
-                        </div>
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="loginPassword" class="block text-white text-xs mb-1">Your TIKTOK-PS Password :</label>
-                        <div class="input-field flex items-center rounded-lg px-2 py-1.5">
-                            <i class="fas fa-lock text-white mr-2"></i>
-                            <input type="password" name="password" id="loginPassword"
-                                class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                                placeholder="Enter your TIKTOK-PS password" autocomplete="current-password">
-                            <button type="button" id="toggleLogPassword" class="text-white ml-2 focus:outline-none">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                
-                    <input type="hidden" name="serverPort" id="serverPort">
-                    <div class="flex flex-col items-center mt-3 space-y-2">
-                        <button type="button" id="loginButton" class="login-button">
-                            Connect To TIKTOK-PS
-                        </button>
-                        <button type="button" id="createGrowIdButton" class="login-button">
-                            Create TIKTOK-PS Account
-                        </button>
-                    </div>
-                </form>
-            </div>
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm">
+    <div class="relative flex bg-[#a67c00]/90 border-4 border-[#ffcc80] shadow-2xl p-8 w-[750px] rounded-xl backdrop-blur-md items-center justify-between animate-slideUp">
+      
+      <!-- Kiri: Tulisan -->
+      <div class="flex flex-col items-start justify-center w-1/2 pr-4">
+        <p class="text-white font-extrabold text-4xl mb-4 drop-shadow-lg leading-tight animate-bounce-slow">
+          Log into your<br><span class="text-[#ffd54f]">GTPS ID</span>
+        </p>
+        <p class="text-sm text-white opacity-90 mb-3">
+          Welcome back, farmer! 🌾<br>Let's grow your adventure again!
+        </p>
+        <div class="flex space-x-2 mt-2">
+          <span class="text-xs bg-[#ffcc80] text-[#a67c00] px-2 py-1 rounded-full font-bold shadow">🌻 Harvest Time!</span>
+          <span class="text-xs bg-[#ffd54f] text-[#5d4037] px-2 py-1 rounded-full font-bold shadow">🍃 New Season</span>
         </div>
+      </div>
+
+      <!-- Kanan: Form -->
+      <div class="w-1/2">
+        <div id="errorDiv" class="hidden flex flex-col mb-2 text-xs text-red-700 font-bold px-[5px] bg-[#a67c00]/80 rounded">
+          <a id="errorMessage"></a>
+        </div>
+        <form method="post" action="/player/growid/login/validate" accept-charset="UTF-8" id="loginForm">
+          <input name="type" value="log" type="hidden" />
+          <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
+
+          <div class="mb-3">
+            <label for="loginGrowId" class="block text-white text-xs mb-1">GrowID</label>
+            <div class="flex items-center border-2 border-[#ffd54f] rounded bg-[#a67c00]/70 px-2 py-2">
+              <i class="fas fa-user text-white mr-2 text-sm"></i>
+              <input type="text" name="growId" id="loginGrowId" class="w-full bg-transparent text-white text-xs placeholder-white focus:outline-none" placeholder="Enter your GrowID">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="loginPassword" class="block text-white text-xs mb-1">Password</label>
+            <div class="flex items-center border-2 border-[#ffd54f] rounded bg-[#a67c00]/70 px-2 py-2">
+              <i class="fas fa-lock text-white mr-2 text-sm"></i>
+              <input type="password" name="password" id="loginPassword" class="w-full bg-transparent text-white text-xs placeholder-white focus:outline-none" placeholder="Enter your Password">
+              <button type="button" id="toggleLogPassword" class="text-white ml-2 focus:outline-none text-xs">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-4">
+            <button id="loginButton" class="px-5 py-2 rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs hover:from-yellow-500 hover:to-yellow-700 transition duration-300 ease-in-out transform hover:scale-105 font-bold shadow-md">
+              Start Farming
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const textElement = document.getElementById('animatedText');
-            const textContent = 'T I K T O K - P S';
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
 
-            textContent.split('').forEach((char) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                textElement.appendChild(span);
-            });
+    @keyframes slideUp {
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .animate-slideUp {
+      animation: slideUp 1s ease-out forwards;
+    }
 
-            function getRandomBrightColor() {
-                const r = Math.floor(Math.random() * 128 + 128);
-                const g = Math.floor(Math.random() * 128 + 128);
-                const b = Math.floor(Math.random() * 128 + 128);
-                return `rgb(${r}, ${g}, ${b})`;
-            }
+    @keyframes bounceSlow {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+}
+    .animate-bounce-slow {
+      animation: bounceSlow 3s infinite;
+    }
+  </style>
 
-            let index = 0;
-            const spans = textElement.querySelectorAll('span');
-            const animInterval = setInterval(() => {
-                spans.forEach((span, i) => {
-                    span.style.color = i === index ? getRandomBrightColor() : 'white';
-                });
-                index = (index + 1) % spans.length;
-            }, 200);
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (localStorage.getItem('growId')) {
+        document.getElementById('loginGrowId').value = localStorage.getItem('growId');
+      }
+    });
 
-            // Clean up interval on page unload to prevent memory leaks
-            window.addEventListener('unload', function() {
-                clearInterval(animInterval);
-            });
+    document.getElementById('loginButton').addEventListener('click', function (event) {
+      event.preventDefault();
 
-            const storedGrowId = localStorage.getItem('growId');
-            const storedPassword = localStorage.getItem('password');
+      const loginForm = document.getElementById('loginForm');
+      const uName = document.getElementById('loginGrowId').value;
+      const uPass = document.getElementById('loginPassword').value;
 
-            if (storedGrowId) {
-                document.getElementById('loginGrowId').value = storedGrowId;
-            }
+      if (!uName || !uPass) {
+        document.getElementById('errorDiv').classList.remove('hidden');
+        document.getElementById('errorMessage').innerHTML = 'Username or Password is empty';
+        return;
+      } else if (uName.length < 4 || uPass.length < 4) {
+        document.getElementById('errorDiv').classList.remove('hidden');
+        document.getElementById('errorMessage').innerHTML = 'Username or Password must be at least 4 characters long';
+        return;
+      } else {
+        loginForm.submit();
+        localStorage.setItem('growId', document.getElementById('loginGrowId').value);
+      }
+    });
 
-            if (storedPassword) {
-                document.getElementById('loginPassword').value = storedPassword;
-            }
-
-            // Improved event listeners for form submission
-            const loginForm = document.getElementById('loginForm');
-            
-            document.getElementById('loginButton').addEventListener('click', function (event) {
-                event.preventDefault();
-                
-                // Get values safely
-                const loginGrowId = document.getElementById('loginGrowId');
-                const loginPassword = document.getElementById('loginPassword');
-                const serverPortInput = document.getElementById("serverPort");
-                const typeInput = document.querySelector('input[name="type"]');
-                
-                const uName = loginGrowId ? loginGrowId.value : '';
-                const uPass = loginPassword ? loginPassword.value : '';
-
-                // Validation before submitting the form
-                if (!uName || !uPass) {
-                    const errorDiv = document.getElementById('errorDiv');
-                    const errorMessage = document.getElementById('errorMessage');
-                    if (errorDiv && errorMessage) {
-                        errorDiv.classList.remove('hidden');
-                        errorMessage.textContent = 'Username or Password is empty';
-                    }
-                    return;
-                } else if (uName.length < 3 || uPass.length < 4) {
-                    const errorDiv = document.getElementById('errorDiv');
-                    const errorMessage = document.getElementById('errorMessage');
-                    if (errorDiv && errorMessage) {
-                        errorDiv.classList.remove('hidden');
-                        errorMessage.textContent = 'Username or Password must be at least 4 characters long';
-                    }
-                    return;
-                } else {
-                    // Save credentials to localStorage safely
-                    try {
-                        if (typeInput) typeInput.value = 'login';
-                        localStorage.setItem('growId', uName);
-                        localStorage.setItem('password', uPass);
-                        localStorage.setItem('type', 'login');
-                        if (serverPortInput) localStorage.setItem('port', serverPortInput.value);
-                    } catch (e) {
-                        console.error("LocalStorage error:", e);
-                    }
-
-                    // Prevent multiple form submissions
-                    if (this) this.disabled = true;
-
-                    // Submit with a slight delay to prevent rendering issues
-                    setTimeout(function() {
-                        if (loginForm) loginForm.submit();
-                    }, 50);
-                }
-            });
-
-            document.getElementById('createGrowIdButton').addEventListener('click', function (event) {
-                event.preventDefault();
-
-                // Get values safely
-                const loginGrowId = document.getElementById('loginGrowId');
-                const loginPassword = document.getElementById('loginPassword');
-                const serverPortInput = document.getElementById("serverPort");
-                const typeInput = document.querySelector('input[name="type"]');
-                
-                const uName = loginGrowId ? loginGrowId.value : '';
-                const uPass = loginPassword ? loginPassword.value : '';
-
-                // Validation before submitting the form
-                if (!uName || !uPass) {
-                    const errorDiv = document.getElementById('errorDiv');
-                    const errorMessage = document.getElementById('errorMessage');
-                    if (errorDiv && errorMessage) {
-                        errorDiv.classList.remove('hidden');
-                        errorMessage.textContent = 'Username or Password is empty';
-                    }
-                    return;
-                } else if (uName.length < 3 || uPass.length < 4) {
-                    const errorDiv = document.getElementById('errorDiv');
-                    const errorMessage = document.getElementById('errorMessage');
-                    if (errorDiv && errorMessage) {
-                        errorDiv.classList.remove('hidden');
-                        errorMessage.textContent = 'Username or Password must be at least 4 characters long';
-                    }
-                    return;
-                } else {
-                    // Save credentials to localStorage safely
-                    try {
-                        if (typeInput) typeInput.value = 'create';
-                        localStorage.setItem('growId', uName);
-                        localStorage.setItem('password', uPass);
-                        localStorage.setItem('type', 'create');
-                        if (serverPortInput) localStorage.setItem('port', serverPortInput.value);
-                    } catch (e) {
-                        console.error("LocalStorage error:", e);
-                    }
-                    
-                    // Prevent multiple form submissions
-                    if (this) this.disabled = true;
-
-                    // Submit with a slight delay to prevent rendering issues
-                    setTimeout(function() {
-                        if (loginForm) loginForm.submit();
-                    }, 50);
-                }
-            });
-
-            document.getElementById('toggleLogPassword').addEventListener('click', function () {
-                const passwordField = document.getElementById('loginPassword');
-                if (!passwordField) return;
-                
-                const passwordFieldType = passwordField.getAttribute('type');
-                if (passwordFieldType === 'password') {
-                    passwordField.setAttribute('type', 'text');
-                    this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-                } else {
-                    passwordField.setAttribute('type', 'password');
-                    this.innerHTML = '<i class="fas fa-eye"></i>';
-                }
-            });
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'930ae1d2b877cdd9',t:'MTc0NDcxNDIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
+    document.getElementById('toggleLogPassword').addEventListener('click', function () {
+      const LpasswordField = document.getElementById('loginPassword');
+      const LpasswordFieldType = LpasswordField.getAttribute('type');
+      if (LpasswordFieldType === 'password') {
+        LpasswordField.setAttribute('type', 'text');
+        this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+      } else {
+        LpasswordField.setAttribute('type', 'password');
+        this.innerHTML = '<i class="fas fa-eye"></i>';
+      }
+    });
+  </script>
+</body>
 </html>
