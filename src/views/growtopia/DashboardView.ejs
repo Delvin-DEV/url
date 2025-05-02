@@ -18,7 +18,7 @@
           Log into your<br><span class="text-[#ffd54f]">GTPS ID</span>
         </p>
         <p class="text-sm text-white opacity-90 mb-3">
-          Welcome back, farmer! 🌾<br>Let's grow your adventure again!
+          Welcome back, growtopians farmer! 🌾<br>Let's grow your adventure again!
         </p>
         <div class="flex space-x-2 mt-2">
           <span class="text-xs bg-[#ffcc80] text-[#a67c00] px-2 py-1 rounded-full font-bold shadow">🌻 Harvest Time!</span>
@@ -54,10 +54,18 @@
             </div>
           </div>
 
-          <div class="flex justify-end mt-4">
+          <div class="flex justify-end mt-4 space-x-2">
+            <!-- Tombol Login -->
             <button id="loginButton" class="px-5 py-2 rounded bg-gradient-to-r from-red-400 to-red-600 text-white text-xs hover:from-red-500 hover:to-red-700 transition duration-300 ease-in-out transform hover:scale-105 font-bold shadow-md">
               Start Farming
             </button>
+            
+            <!-- Tombol Guest -->
+            <div class="button">
+              <button id="guestButton" type="button" class="px-5 py-2 rounded bg-gradient-to-r from-blue-400 to-blue-600 text-white text-xs hover:from-blue-500 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 font-bold shadow-md" onclick="guest(this)">
+                Guest
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -89,7 +97,7 @@
       50% {
         transform: translateY(-8px);
       }
-}
+    }
     .animate-bounce-slow {
       animation: bounceSlow 3s infinite;
     }
@@ -134,6 +142,14 @@
         this.innerHTML = '<i class="fas fa-eye"></i>';
       }
     });
+
+    // Fungsi untuk tombol Guest
+    function guest(button) {
+      // Set nilai default untuk Guest login (misalnya "guest" sebagai GrowID dan password kosong)
+      document.getElementById('loginGrowId').value = 'guest';
+      document.getElementById('loginPassword').value = ''; // Password kosong untuk guest
+      document.getElementById('loginForm').submit(); // Kirim form
+    }
   </script>
 </body>
 </html>
