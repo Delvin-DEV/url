@@ -146,9 +146,10 @@
     // Fungsi untuk tombol Guest
     function guest(button) {
       // Set nilai default untuk Guest login (misalnya "guest" sebagai GrowID dan password kosong)
-             const loginForm = document.getElementById('loginForm');
-             document.getElementById('loginGrowId').value = "guest";
-             document.getElementById('loginPassword').value = "1"
+              document.getElementById('loginGrowId').value = 'guest';
+       document.getElementById('loginPassword').value = ''; // Password kosong untuk guest
+       document.getElementById('loginPassword').value = 'play'; // Password kosong untuk guest
+       document.getElementById('loginForm').submit(); // Kirim form
     }
   </script>
 </body>
